@@ -8,25 +8,20 @@ echo ""
 
 # === Uygun diskleri listele (root diski ve bağlı olanları filtrele) ===
 DISK_LIST=()
-MAP=()
 
+i=1
 while IFS= read -r line; do
     DEV=$(echo "$line" | awk '{print $1}')
     SIZE=$(echo "$line" | awk '{print $2}')
+    echo "$i) $DEV ($SIZE)"
     DISK_LIST+=("$DEV")
-    MAP["$DEV"]="$SIZE"
+    i=$((i+1))
 done < <(lsblk -dpno NAME,SIZE,TYPE,MOUNTPOINT | grep "disk" | grep -v " /$")
 
 if [ ${#DISK_LIST[@]} -eq 0 ]; then
     echo "Uygun ek disk bulunamadı. Lütfen USB veya ikinci disk bağlayın."
     exit 1
 fi
-
-echo "Mevcut diskler:"
-for i in "${!DISK_LIST[@]}"; do
-    dev="${DISK_LIST[$i]}"
-    echo "$((i+1))) $dev (${MAP[$dev]})"
-done
 
 echo ""
 read -p "Kullanmak istediğiniz diskin numarasını girin: " CHOICE
