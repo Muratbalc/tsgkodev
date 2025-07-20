@@ -68,5 +68,5 @@ echo "[+] /etc/fstab yapılandırılıyor..."
 echo "UUID=$UUID $MOUNT_POINT ext4 defaults 0 2" | sudo tee -a /etc/fstab
 
 echo ""
-echo "✅ TAMAMLANDI: $CHOSEN_DISK TPM ile şifrelendi ve /mnt/mydisk olarak ayarlandı."
-echo "🔁 Sistemi yeniden başlattığında otomatik açılıp mount edilecektir."
+echo "TAMAMLANDI: $CHOSEN_DISK TPM ile şifrelendi ve /mnt/mydisk olarak ayarlandı."
+echo "Sistemi yeniden başlattığında otomatik açılıp mount edilecektir."
